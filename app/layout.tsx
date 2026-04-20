@@ -9,8 +9,8 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "SCANREC - Pharmacy Verification System",
-  description: "Clinical-grade pharmaceutical barcode verification and tracking system",
+  title: "SCANREC | DSCSA Verification",
+  description: "Independent pharmacy verification for DSCSA compliance. Automated item-level tracing and institutional audit logging.",
   generator: "v0.app",
   icons: {
     icon: [
