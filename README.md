@@ -1,153 +1,92 @@
-# SCANREC — Pharmacy Verification System
+SCANREC — MVP Pharmacy Scan System
 
-SCANREC is a lightweight pharmacy barcode scanning system designed to validate and log serialized pharmaceutical products using GS1 data standards and DSCSA-aligned fields.
+SCANREC is a minimal pharmacy barcode scanning system designed to capture and store raw scan data for later review.
 
-This is an **MVP-first system** focused on reliability before scale.
+This is an MVP focused only on reliable scan capture and database persistence.
 
----
+Core Purpose
 
-## Core Purpose
+The system follows a simple, reliable flow:
 
-The system provides a simple, end-to-end flow:
+Scan → Store → Display History
 
-**Scan → Parse GS1 → Store in Supabase → Display Result → Persist History**
+It captures raw barcode or DataMatrix scan strings and stores them in Supabase. No parsing, validation, or compliance logic is included in the MVP.
 
-No advanced AI, automation, or enterprise features are included in the MVP stage.
+Tech Stack
+Next.js (App Router)
+TypeScript
+Tailwind CSS
+Supabase (database)
+Vercel (deployment)
+GitHub (version control)
+System Flow
+User performs a scan (camera or simulated input)
+Raw scan string is captured by the frontend
+Scan is written directly to Supabase
+Dashboard retrieves and displays scan history
+Database Schema (Supabase)
 
----
+Table: scans
 
-## Tech Stack
+Field	Type	Description
+id	uuid	Primary key
+created_at	timestamptz	Auto-generated timestamp
+raw_scan	text	Raw barcode / DataMatrix string
+Development Rules
+MVP Scope Only
 
-* Next.js (App Router)
-* TypeScript
-* Tailwind CSS
-* Supabase (database)
-* Vercel (deployment)
-* GitHub (source control)
-
----
-
-## System Flow
-
-1. User triggers scan (simulated or camera input)
-2. GS1 barcode is parsed into structured fields:
-
-   * GTIN
-   * Serial
-   * Lot
-   * Expiry
-3. Scan result is classified:
-
-   * Match
-   * Mismatch
-   * Unresolved
-4. Data is written to Supabase (`compliance_log`)
-5. Result page displays scan output
-6. History page retrieves persistent scan logs
-
----
-
-## Database Schema (Supabase)
-
-Table: `compliance_log`
-
-| Field      | Type      | Description                   |
-| ---------- | --------- | ----------------------------- |
-| id         | uuid      | Primary key                   |
-| created_at | timestamp | Auto timestamp                |
-| gtin       | text      | Product identifier            |
-| serial     | text      | Serialized unit               |
-| lot        | text      | Batch number                  |
-| expiry     | text      | Expiration date               |
-| status     | text      | match / mismatch / unresolved |
-| raw_scan   | text      | Original barcode string       |
-
----
-
-## Development Rules
-
-### MVP Scope Only
-
-This project intentionally excludes:
-
-* AI decision systems
-* predictive analytics
-* multi-tenant architecture
-* enterprise scaling features
+This system intentionally stays minimal:
 
 We only build:
 
-> A fully working scan → database → history pipeline
+Scan input capture
+Supabase storage
+Scan history display
 
----
+We do NOT build:
 
-### Branching Strategy
+GS1 parsing
+DSCSA compliance logic
+GTIN/lot/expiry extraction
+validation or classification systems
+Workflow
+Create task in Trello
+Implement feature in dev branch
+Test locally and on mobile
+Deploy to Vercel
+Validate end-to-end flow
+Merge into main
+Definition of Done
 
-* `main` → production (Vercel live)
-* `dev` → active development
+A feature is complete only when:
 
-Never commit directly to `main` without testing.
+Scan data is stored in Supabase
+Data appears in dashboard correctly
+Works on mobile devices
+No runtime errors in scan flow
+Current MVP Focus
 
----
+We are currently building:
 
-### Workflow
-
-1. Create task in Trello
-2. Implement in GitHub (`dev` branch)
-3. UI built in v0 (if needed)
-4. Deploy via Vercel
-5. Test on real device
-6. Merge to `main`
-
----
-
-## Definition of Done
-
-A feature is only complete when:
-
-* It works in production (Vercel)
-* Data is correctly stored in Supabase
-* It passes mobile testing
-* No runtime errors or broken flows
-
----
-
-## Current Focus (MVP Phase)
-
-We are currently building and validating:
-
-* Scan input flow
-* GS1 parsing logic
-* Supabase write integration
-* Result page accuracy
-* History persistence
-
----
-
-## Future Phases (Not in MVP)
+Scan input interface
+Supabase write integration
+Scan history dashboard
+Future Phases (Not in MVP)
 
 After MVP stability is confirmed:
 
-* AI-assisted validation
-* anomaly detection
-* compliance automation
-* advanced audit reporting
-
----
-
-## Philosophy
+GS1 barcode parsing
+DSCSA compliance validation
+structured product fields (GTIN, serial, lot, expiry)
+audit and reporting systems
+Philosophy
 
 We prioritize:
 
-* Simplicity over complexity
-* Working systems over advanced systems
-* Reliability over feature count
-* End-to-end correctness over scalability design
-
----
-
-## License
+Simplicity over complexity
+Working systems over perfect systems
+End-to-end functionality over feature depth
+Stability before intelligence
+License
 
 Internal SCANREC LLC system — not for public distribution.
-* or make a **1-page “what to build first” cheat sheet**
-* or tighten your Supabase + scan flow so everything actually connects cleanly end-to-end
