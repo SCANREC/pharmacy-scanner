@@ -1,6 +1,6 @@
-# SCANREC
+# ScanRec
 
-SCANREC is a minimal barcode scanning system designed to capture and store raw scan data for later review.
+ScanRec is a minimal barcode scanning system designed to capture and store raw scan data for later review.
 
 This system is focused only on reliable scan capture and database persistence.
 
