@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* index.css stays intentionally small. Most styling lives inline through
+   Tailwind classes, while this file holds the custom animations Tailwind does
+   not provide out of the box for the scanner and result-screen effects. */
+
+/* Animated line that sweeps across the scan target box. */
+@keyframes scan-line {
+  0% { top: 0%; }
+  50% { top: 100%; }
+  100% { top: 0%; }
+}
+
+.animate-scan-line {
+  animation: scan-line 2s ease-in-out infinite;
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+}
+
+/* Single outward pulse used on the result icons instead of a repeating ping. */
+@keyframes ping-once {
+  0% { transform: scale(1); opacity: 0.6; }
+  80% { transform: scale(1.4); opacity: 0; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+.animate-ping-once {
+  animation: ping-once 0.8s ease-out forwards;
+}
+
+/* One-time entrance animation for the green success icon. */
+@keyframes pulse-once {
+  0% { transform: scale(0.8); opacity: 0; }
+  60% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-pulse-once {
+  animation: pulse-once 0.5s ease-out forwards;
+}
