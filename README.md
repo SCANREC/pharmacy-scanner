@@ -18,7 +18,7 @@ It captures raw barcode or DataMatrix scan strings and stores them in Supabase. 
 
 ## Tech Stack
 
-- Next.js (App Router)
+- Vite (Current App Router. Going to change to Next.js for better security purposes later on)
 - TypeScript
 - Tailwind CSS
 - Supabase (database)
